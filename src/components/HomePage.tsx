@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import QuizComponent from './QuizComponent'
 import { LoginContext } from '../contexts/login-context'
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 
 const HomePage = () => {
 
   const { setPseudo } = useContext(LoginContext)!
-  const pseudo = Cookies.get('pseudo')
+  const pseudo = localStorage.getItem('pseudo') // 
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     const pseudo = e.currentTarget.elements.namedItem('pseudo') as HTMLInputElement
-    Cookies.set('pseudo', pseudo.value, { expires: 1 })
+    localStorage.setItem('pseudo', pseudo.value) // Cookies.set('pseudo', pseudo.value, { expires: 1 })
     setPseudo(pseudo.value)
   }
 
@@ -29,7 +29,7 @@ const HomePage = () => {
                 type="text"
                 className="grow"
                 placeholder="Select pseudo..."
-                defaultValue={pseudo}
+                defaultValue={pseudo!}
               />
             </label>
             <button type="submit" className="btn w-20 mt-5 bg-emerald-900">Go!</button>

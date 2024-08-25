@@ -1,16 +1,16 @@
 import React, { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { LoginContext } from "../contexts/login-context"
-import Cookies from "js-cookie"
+// import Cookies from "js-cookie"
 
 const NavBar = () => {
   const { setPseudo } = useContext(LoginContext)!
-  const pseudo = Cookies.get("pseudo")
+  const pseudo = localStorage.getItem("pseudo") //Cookies.get("pseudo")
   const navigate = useNavigate()
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    Cookies.remove("pseudo")
+    localStorage.removeItem("pseudo") // Cookies.remove("pseudo")
     setPseudo("")
     navigate("/")
     window.location.reload()
